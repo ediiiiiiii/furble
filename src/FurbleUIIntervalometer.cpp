@@ -24,11 +24,12 @@ void UI::Intervalometer::Spinner::update(void) {
     m_SpinValue.m_Unit = SpinValue::UNIT_NIL;
     lv_obj_clear_flag(m_RowSpinners, LV_OBJ_FLAG_HIDDEN);
 
-    uint32_t h = lv_roller_get_selected(m_Roller[0]);
-    uint32_t t = lv_roller_get_selected(m_Roller[1]);
-    uint32_t u = lv_roller_get_selected(m_Roller[2]);
+    uint32_t o = lv_roller_get_selected(m_Roller[0]);
+    uint32_t h = lv_roller_get_selected(m_Roller[1]);
+    uint32_t t = lv_roller_get_selected(m_Roller[2]);
+    uint32_t u = lv_roller_get_selected(m_Roller[3]);
 
-    m_SpinValue.m_Value = (h * 100) + (t * 10) + u;
+    m_SpinValue.m_Value = (o * 1000) + (h * 100) + (t * 10) + u;
   }
 
   if (m_RollerUnit != nullptr) {
@@ -67,13 +68,15 @@ void UI::Intervalometer::Spinner::updateLabels(void) {
 
   if (m_SpinValue.m_Unit != SpinValue::UNIT_INF) {
     // Update rollers
-    uint32_t h = m_SpinValue.m_Value / 100;
+    uint32_t o = m_SpinValue.m_Value / 1000;
+    uint32_t h = (m_SpinValue.m_Value % 1000) / 100;
     uint32_t t = (m_SpinValue.m_Value % 100) / 10;
     uint32_t u = (m_SpinValue.m_Value % 10);
 
-    lv_roller_set_selected(m_Roller[0], h, LV_ANIM_ON);
-    lv_roller_set_selected(m_Roller[1], t, LV_ANIM_ON);
-    lv_roller_set_selected(m_Roller[2], u, LV_ANIM_ON);
+    lv_roller_set_selected(m_Roller[0], o, LV_ANIM_ON);
+    lv_roller_set_selected(m_Roller[1], h, LV_ANIM_ON);
+    lv_roller_set_selected(m_Roller[2], t, LV_ANIM_ON);
+    lv_roller_set_selected(m_Roller[3], u, LV_ANIM_ON);
 
     if (m_SpinValue.m_Unit != SpinValue::UNIT_NIL) {
       uint32_t i = 0;

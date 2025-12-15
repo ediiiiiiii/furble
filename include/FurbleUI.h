@@ -95,7 +95,7 @@ class UI {
 
       lv_obj_t *m_RowSpinners;
       // array of rollers, 0 = hundred, 1 = ten, 2 = one
-      std::array<lv_obj_t *, 3> m_Roller = {nullptr, nullptr, nullptr};
+      std::array<lv_obj_t *, 4> m_Roller = {nullptr, nullptr, nullptr, nullptr};
       lv_obj_t *m_RollerUnit = nullptr;
     };
 
